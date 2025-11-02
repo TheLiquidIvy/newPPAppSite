@@ -5,6 +5,7 @@ import { componentTagger } from "@devvai/devv-tagger-plugin"
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/newPPAppSite/',
   plugins: [componentTagger(), react()],
   resolve: {
     alias: {
