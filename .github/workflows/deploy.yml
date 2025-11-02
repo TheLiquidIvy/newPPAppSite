@@ -5,19 +5,18 @@ push:
 branches: ["main"] # Trigger on push to your main branch
 
 jobs:
-build:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout Code
-uses: actions/checkout@v4
+   build:
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout Code
+            uses: actions/checkout@v4
+         - name: Setup Node
+            uses: actions/setup-node@v4
+            with:
+            node-version: '20' # Use your desired Node version
 
-- name: Setup Node
-   uses: actions/setup-node@v4
-   with:
-     node-version: '20' # Use your desired Node version
-
-  - name: Install Dependencies
-    run: |
+        - name: Install Dependencies
+          run: |
       if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
         echo "Using npm ci (lockfile present)"
         npm ci
