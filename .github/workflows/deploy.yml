@@ -1,8 +1,8 @@
-name: Deploy to GitHub Pages
+name: Deploy Website to Pages
 
 on:
   push:
-    branches: ["main"] # Set this to your main branch name (e.g., 'main' or 'master')
+    branches: ["main"] # Trigger on push to your main branch
 
 jobs:
   build:
@@ -11,37 +11,32 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Use your project's desired Node.js version
-          cache: 'npm' # Optional: Speeds up dependency installation
+          node-version: '20' # Use your desired Node version
 
       - name: Install Dependencies
         run: npm ci
 
       - name: Build Project
-        run: npm run build # This command runs your build script (e.g., 'vite build')
+        run: npm run build # Your build script (e.g., tsc or vite build)
 
-      - name: Upload Pages Artifact
+      - name: Upload Artifact
+        # Uploads the build output for the deploy job
         uses: actions/upload-pages-artifact@v3
         with:
-          # 👇 CRITICAL: This must be the directory created by 'npm run build' (usually 'dist' for Vite)
-          path: './dist' 
+          path: './dist' # IMPORTANT: Change this to your build output directory (e.g., 'build', 'docs')
 
   deploy:
-    needs: build # This job runs only after the 'build' job succeeds
+    needs: build # Ensures this runs after the build job is successful
     runs-on: ubuntu-latest
     environment:
-      # This environment name is a GitHub Pages standard
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
-    # CRITICAL: Permissions are required for the deployment token
     permissions:
-      pages: write      # Grants permission to deploy content
-      id-token: write   # Grants permission for authentication
-      
+      pages: write      # Grants permission to deploy to GitHub Pages
+      id-token: write   # Grants permission to authenticate with GitHub's deployment service
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
