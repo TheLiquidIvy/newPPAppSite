@@ -2,47 +2,41 @@ name: Deploy Website to Pages
 
 on:
 push:
-branches: ["main"] # Trigger on push to your main branch
+branches: ["main"]
 
 jobs:
-  build:
-   runs-on: ubuntu-latest
-     steps:
-         - name: Checkout Code
-           uses: actions/checkout@v4
-         - name: Setup Node
-         uses: actions/setup-node@v4
-            with:
-            node-version: '20' # Use your desired Node version
+build:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout Code
+uses: actions/checkout@v4
 
-        - name: Install Dependencies
-          run: |
-      if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
-        echo "Using npm ci (lockfile present)"
-        npm ci
-      else
-        echo "No lockfile found — using npm install"
-        npm install
-      fi
+  - name: Setup Node
+    uses: actions/setup-node@v4
+    with:
+      node-version: '20'
+
+  - name: Install Dependencies
+    run: npm install
 
   - name: Build Project
-    run: npm run build # Your build script (e.g., tsc or vite build)
+    run: npm run build
 
   - name: Upload Artifact
     uses: actions/upload-pages-artifact@v3
     with:
-      path: './dist' # IMPORTANT: Ensure this matches your build output directory (e.g., 'build', 'docs')
+      path: './dist'
 
 
 deploy:
-needs: build # Ensures this runs after the build job is successful
+needs: build
 runs-on: ubuntu-latest
 environment:
 name: github-pages
 url: ${{ steps.deployment.outputs.page_url }}
 permissions:
-pages: write     # Grants permission to deploy to GitHub Pages
-id-token: write  # Grants permission to authenticate with GitHub's deployment service
+pages: write
+id-token: write
 steps:
 - name: Deploy to GitHub Pages
 id: deployment
