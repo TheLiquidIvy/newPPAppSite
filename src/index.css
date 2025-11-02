@@ -1,0 +1,290 @@
+/**
+ * =====================================
+ *         PIXELPLAQUE DESIGN SYSTEM
+ * =====================================
+ * 
+ * Project: PixelPlaque - Digital Agency
+ * Type: Corporate Website with Cyberpunk Aesthetic
+ * 
+ * DESIGN PHILOSOPHY
+ * -----------------
+ * Core Principle: Futuristic cyberpunk meets professional agency
+ * Design Style: Cyberpunk with neon glows, glitch effects, and grid overlays
+ * Emotion Goal: Cutting-edge, innovative, powerful, electric
+ * 
+ * COLOR SYSTEM (HSL FORMAT)
+ * -------------
+ * Magenta (Primary): 328 100% 54% - Electric magenta for primary actions
+ * Cyan (Accent): 180 100% 50% - Neon cyan for highlights and accents
+ * Dark Base: 240 10% 8% - Deep dark background
+ * Grid Lines: 180 100% 50% - Cyan grid overlay
+ * Text Glow: Magenta and Cyan shadows for neon effect
+ * 
+ * TYPOGRAPHY
+ * ----------
+ * Headings: Bold, uppercase with glitch effects
+ * Body: Clean, readable with subtle glow
+ * Code/Tech: Monospace fonts for technical feel
+ * 
+ * INTERACTIONS
+ * ------------
+ * Transitions: 200-300ms with cubic-bezier easing
+ * Hover: Glow intensification and color shifts
+ * States: Glitch animations on key elements
+ * Borders: Neon glowing borders with animation
+ * ====================================
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme (lighter cyberpunk) */
+    --background: 210 40% 98%;
+    --foreground: 240 10% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 8%;
+    --primary: 328 100% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 240 10% 8%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 240 5% 45%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 240 10% 8%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 10% 85%;
+    --input: 240 10% 85%;
+    --ring: 328 100% 54%;
+    --radius: 0.5rem;
+    --neon-magenta: 328 100% 54%;
+    --neon-cyan: 180 100% 50%;
+    --grid-color: 180 100% 50%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark theme (full cyberpunk) */
+    --background: 240 10% 8%;
+    --foreground: 0 0% 98%;
+    --card: 240 8% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 8% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 328 100% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 240 10% 8%;
+    --muted: 240 8% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 8% 20%;
+    --input: 240 8% 20%;
+    --ring: 180 100% 50%;
+    --neon-magenta: 328 100% 54%;
+    --neon-cyan: 180 100% 50%;
+    --grid-color: 180 100% 50%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Cyberpunk grid background */
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .dark .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+  }
+}
+
+@layer utilities {
+  /* Neon glow effects */
+  .neon-magenta {
+    color: hsl(var(--neon-magenta));
+    text-shadow: 0 0 10px hsl(var(--neon-magenta) / 0.5),
+                 0 0 20px hsl(var(--neon-magenta) / 0.3),
+                 0 0 30px hsl(var(--neon-magenta) / 0.2);
+  }
+
+  .neon-cyan {
+    color: hsl(var(--neon-cyan));
+    text-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.5),
+                 0 0 20px hsl(var(--neon-cyan) / 0.3),
+                 0 0 30px hsl(var(--neon-cyan) / 0.2);
+  }
+
+  .glow-magenta {
+    box-shadow: 0 0 20px hsl(var(--neon-magenta) / 0.3),
+                0 0 40px hsl(var(--neon-magenta) / 0.2),
+                inset 0 0 20px hsl(var(--neon-magenta) / 0.1);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.3),
+                0 0 40px hsl(var(--neon-cyan) / 0.2),
+                inset 0 0 20px hsl(var(--neon-cyan) / 0.1);
+  }
+
+  .border-glow-magenta {
+    border-color: hsl(var(--neon-magenta));
+    box-shadow: 0 0 10px hsl(var(--neon-magenta) / 0.5),
+                inset 0 0 10px hsl(var(--neon-magenta) / 0.2);
+  }
+
+  .border-glow-cyan {
+    border-color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.5),
+                inset 0 0 10px hsl(var(--neon-cyan) / 0.2);
+  }
+
+  /* Glitch effect animation */
+  @keyframes glitch {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+    }
+    60% {
+      transform: translate(2px, 2px);
+    }
+    80% {
+      transform: translate(2px, -2px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  .glitch {
+    animation: glitch 0.3s ease-in-out;
+  }
+
+  .glitch-hover:hover {
+    animation: glitch 0.3s ease-in-out infinite;
+  }
+
+  /* Scanline effect */
+  @keyframes scanline {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  .scanline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      hsl(var(--neon-cyan) / 0.3),
+      transparent
+    );
+    animation: scanline 3s linear infinite;
+    pointer-events: none;
+  }
+
+  /* Pulse glow animation */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--neon-magenta) / 0.3),
+                  0 0 40px hsl(var(--neon-magenta) / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(var(--neon-magenta) / 0.5),
+                  0 0 60px hsl(var(--neon-magenta) / 0.3);
+    }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Cyber corners */
+  .cyber-corners {
+    position: relative;
+  }
+
+  .cyber-corners::before,
+  .cyber-corners::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid hsl(var(--neon-cyan));
+  }
+
+  .cyber-corners::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .cyber-corners::after {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* Flicker effect */
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    41%, 43% { opacity: 0.8; }
+    45%, 47% { opacity: 0.9; }
+    50% { opacity: 0.85; }
+  }
+
+  .flicker {
+    animation: flicker 3s linear infinite;
+  }
+}
