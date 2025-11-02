@@ -11,28 +11,28 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20' # Use your desired Node version
-     - name: Install Dependencies
-  run: |
-    if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
-      echo "Using npm ci (lockfile present)"
-      npm ci
-    else
-      echo "No lockfile found — using npm install"
-      npm install
-    fi
-      - name: Build Project
-        run: npm run build # Your build script (e.g., tsc or vite build)
+       - name: Setup Node
+    uses: actions/setup-node@v4
+    with:
+      node-version: '20' # Use your desired Node version
 
-      - name: Upload Artifact
-        # Uploads the build output for the deploy job
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist' # IMPORTANT: Change this to your build output directory (e.g., 'build', 'docs')
+  - name: Install Dependencies
+    run: |
+      if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+        echo "Using npm ci (lockfile present)"
+        npm ci
+      else
+        echo "No lockfile found — using npm install"
+        npm install
+      fi
 
+  - name: Build Project
+    run: npm run build # Your build script (e.g., tsc or vite build)
+
+  - name: Upload Artifact
+    uses: actions/upload-pages-artifact@v3
+    with:
+      path: './dist' # IMPORTANT: Change this to your build output directory (e.g., 'build', 'docs')
   deploy:
     needs: build # Ensures this runs after the build job is successful
     runs-on: ubuntu-latest
